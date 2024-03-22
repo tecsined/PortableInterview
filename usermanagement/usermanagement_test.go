@@ -10,14 +10,11 @@ func TestActiveAndContains_ActiveUserWithEmailContainingCriteria(t *testing.T) {
 	criteria := "doe"
 
 	// Act 
-	filteredUser, isActive := user.ActiveAndContains(criteria)
+	isActive := user.ActiveAndContains(criteria)
 
 	// Assert
 	if !isActive {
 		t.Errorf("Expected user to be active, but got inactive")
-	}
-	if filteredUser.Email != user.Email {
-		t.Errorf("Expected filtered user to be the same user")
 	}
 }
 
@@ -27,7 +24,7 @@ func TestActiveAndContains_InactiveUserWithEmailContainingCriteria(t *testing.T)
 	criteria := "doe"
 
 	// Act
-	_, isActive := user.ActiveAndContains(criteria)
+	isActive := user.ActiveAndContains(criteria)
 
 	// Assert
 	if isActive {
@@ -41,13 +38,10 @@ func TestActiveAndContains_NoCriteriaMatch(t *testing.T) {
 	criteria := "bar"
 
 	// Act 
-	filteredUser, isActive := user.ActiveAndContains(criteria)
+	isActive := user.ActiveAndContains(criteria)
 
 	// Assert 
 	if isActive {
 		t.Errorf("Expected user to be inactive due to no criteria match")
-	}
-	if filteredUser != nil {
-		t.Errorf("Expected no user to be returned for no criteria match")
 	}
 }
